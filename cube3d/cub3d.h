@@ -3,6 +3,10 @@
 # define BUFFER_SIZE 1
 # define PIXEL_SIZE 32
 # define PNG_SIZE 4
+# define KEYPRESS 2
+# define KEYRELEASE 3
+# define KEYPRESSMASK 1L
+# define KEYRELEASEMASK 2L
 
 # include <stdio.h>
 # include <unistd.h>
@@ -23,13 +27,15 @@ typedef struct  s_img {
     int         endian;
 }               t_img;
 
-typedef struct	s_keys {
-	int			w;
-	int			a;
-	int			s;
-	int			d;
-	int			esc;
-}				t_keys;
+// typedef struct s_player{
+// 	int			pos_x;
+// 	int			pos_y;
+// }			t_player;
+
+typedef struct	s_keyboard {
+	int			keyboard[128];
+}				t_keyboard;
+
 
 typedef struct	s_direction {
 	int			north;
@@ -42,7 +48,6 @@ typedef struct s_png {
 	int			px;
 	int			py;
 }				t_png;
-
 
 typedef struct  s_map {
     int         res_x;
@@ -60,8 +65,8 @@ typedef struct  s_map {
     int         c_blue;
 	int			color_floor;
 	int			color_ceiling;
-	// int			start_x;
-	// int			start_y;
+	int			start_x;
+	int			start_y;
 	//int			written_pixel;
 	//int			map_size_y;
 	//int			map_start;
@@ -83,12 +88,13 @@ typedef	struct	s_all {
 	t_map		map;
 	t_mlx		mlx;
 	t_direction	direction;
-	t_keys		keys;
+	t_keyboard	keyboard;
 	t_png		png;
 }				t_all;
 
+int			ft_render_map(t_all *all);
 int            	key_hook(int keycode, t_all *all);
-void			ft_draw(t_all *all, t_list *list);
+void			ft_draw(t_all *all);
 void			ft_init_window(t_all *all);
 int             main(int argc, char **argv);
 
@@ -111,6 +117,7 @@ int				ft_lstsize(t_list *lst);
 
 void            my_mlx_pixel_put(t_all *all, int x, int y, int color);
 void        	ft_draw_line(t_all *all, int x, int y, int i);
+void        	ft_draw_line_first(t_all *all, int x, int y, int i);
 void        	draw_pixel_size(t_all *all, int x, int y, int color);
 void			ft_check_start_dir(t_all *all, char c);
 void			ft_draw_png(t_all *all, int x, int y, int color);
@@ -125,11 +132,20 @@ int				create_trgb(int t, int r, int g, int b);
 
 void			ft_init_direction(t_all *all);
 void			ft_init_keys(t_all *all);
+void			ft_init_xy(t_all *all);
 
 void			ft_list_to_matrix(t_all *all, t_list *list);
 void			ft_draw_minimap(t_all *all);
-
+void			ft_draw_minimap_first(t_all *all);
 
 void			ft_draw_visual_line(t_all *all, int color);
+
+int 			ft_key_hit(int keycode, t_all *all);
+int 			ft_key_release(int keycode, t_all *all);
+int 			ft_key_register(t_all *all);
+void			ft_forward(t_all *all);
+void			ft_backward(t_all *all);
+void			ft_left(t_all *all);
+void			ft_right(t_all *all);
 
 # endif

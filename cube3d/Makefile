@@ -22,6 +22,7 @@ SRC = 	nuovo.c \
 		initializer.c \
 		visual.c \
 		call_map.c \
+		keys.c \
 		
 
 OBJ = $(SRC:.c=.o)

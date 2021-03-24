@@ -6,40 +6,18 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 13:31:04 by bde-luca          #+#    #+#             */
-/*   Updated: 2021/03/23 16:28:44 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:09:41 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			ft_draw(t_all *all, t_list *list)
+int			ft_render_map(t_all *all)
 {
-	// int i = 0;
-
-	ft_list_to_matrix(all, list);
-	ft_draw_minimap(all);
+	ft_draw_minimap_first(all);
 	mlx_put_image_to_window(all->mlx.mlx, all->mlx.win, all->img.img, 0, 0);
-	mlx_hook(all->mlx.win, 2, 1L<<0, key_hook, all);
-}
-
-
-int            key_hook(int keycode, t_all *all)
-{
-    if (keycode == 53)
-    {
-        mlx_destroy_window(all->mlx.mlx, all->mlx.win);
-        exit (0);
-    }
-	if (keycode == 13)
-	{
-		all->png.py -= 10;
-		printf("prova w\n");
-		// ft_check_map(fd, all, list);
-		// mlx_put_image_to_window(all->mlx.mlx, all->mlx.win, all->img.img, 0, 0);
-	}
-	//ft_check_map(fd, all, list);
-	//mlx_put_image_to_window(all->mlx.mlx, all->mlx.win, all->img.img, 0, 0);
-	return (0);
+	ft_key_register(all);
+	return(0);
 }
 
 void		ft_init_window(t_all *all)
@@ -64,20 +42,16 @@ int             main(int argc, char **argv)
 		list = ft_lstnew("");
 		list = ft_check_options(fd, &all, list);
 		
-
 		ft_init_window(&all);
-		ft_init_keys(&all);
-		//ft_draw(&all);
-	
-		
-		// // //LOOP CON REFRESH MAPPA
-		// // //ft_loop_map(all.mlx.mlx, render_next_frame, &all);
+		//ft_init_keys(&all);
+		ft_init_xy(&all);
+
     	ft_check_map(fd, list);
-		ft_draw(&all, list);
-		// ft_list_to_matrix(&all, list);
-		// ft_draw_minimap(&all);
-		// mlx_put_image_to_window(all.mlx.mlx, all.mlx.win, all.img.img, 0, 0);
-		// mlx_hook(all.mlx.win, 2, 1L<<0, key_hook, &all);
+		ft_list_to_matrix(&all, list);
+		
+		mlx_hook(all.mlx.win, KEYPRESS, KEYPRESSMASK, ft_key_hit, &all);
+    	mlx_hook(all.mlx.win, KEYRELEASE, KEYRELEASEMASK, ft_key_release, &all);
+		mlx_loop_hook(all.mlx.mlx, ft_render_map, &all);
     	mlx_loop(all.mlx.mlx);
 	}
 }

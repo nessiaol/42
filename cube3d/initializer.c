@@ -8,11 +8,8 @@ void	ft_init_direction(t_all *all)
 	all->direction.east = 0;
 }
 
-void	ft_init_keys(t_all *all)
+void	ft_init_xy(t_all *all)
 {
-	all->keys.w = 0;
-	all->keys.a = 0;
-	all->keys.s = 0;
-	all->keys.d = 0;
-	all->keys.esc = 0;
+	all->map.start_x = 0;
+	all->map.start_y = 0;
 }

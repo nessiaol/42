@@ -39,27 +39,27 @@ void		ft_check_start_dir(t_all *all, char c)
 		all->direction.east = 1;
 }
 
-// void		ft_draw_png(t_all *all, int x, int y, int color)
-// {
-// 	int l;
-//     int h;
+void		ft_draw_png(t_all *all, int x, int y, int color)
+{
+	int l;
+    int h;
 
-//     h = y;
-//     l = x;
+    h = y;
+    l = x;
 
-//     while (h < (y + PNG_SIZE))
-//     {
-//         l = x;
-//         while (l < (x + PNG_SIZE))
-//         {
-//             my_mlx_pixel_put(all, l, h, color);                   
-//             l++;
-//         }
-//         h++;
-//     }
-// }
+    while (h < (y + PNG_SIZE))
+    {
+        l = x;
+        while (l < (x + PNG_SIZE))
+        {
+            my_mlx_pixel_put(all, l, h, color);                   
+            l++;
+        }
+        h++;
+    }
+}
 
-void        ft_draw_line(t_all *all, int x, int y, int i)
+void        ft_draw_line_first(t_all *all, int x, int y, int i)
 {
     int j;
 
@@ -83,8 +83,39 @@ void        ft_draw_line(t_all *all, int x, int y, int i)
 			all->png.px = x;
 			ft_check_start_dir(all, all->map.map_matrix[i][j]);
 			my_mlx_pixel_put(all, all->png.px, all->png.py, 0x00FFFF00);
-			//ft_draw_png(all, x, y, 0x00FFFF00);
-			ft_draw_visual_line(all, 0x0000FF00);
+			ft_draw_png(all, x, y, 0x00FFFF00);
+			x += PIXEL_SIZE;
+		}
+        else if (all->map.map_matrix[i][j] == '0')
+        {
+            x += PIXEL_SIZE;   
+        }
+        j++;
+    }
+}
+
+void        ft_draw_line(t_all *all, int x, int y, int i)
+{
+    int j;
+
+    j = 0;
+    while(all->map.map_matrix[i][j] != '\0')
+    {
+        if (all->map.map_matrix[i][j] == '1')
+        {
+			draw_pixel_size (all, x, y, 0x0000FFFF);
+            x += PIXEL_SIZE;
+        }
+		else if (all->map.map_matrix[i][j] == '2')
+		{
+            draw_pixel_size (all, x, y, 0x00FF0000);
+            x += PIXEL_SIZE;
+        }
+		else if( all->map.map_matrix[i][j] == 'N' || all->map.map_matrix[i][j] == 'S' ||
+				all->map.map_matrix[i][j] == 'W' || all->map.map_matrix[i][j] == 'E')
+		{
+			ft_check_start_dir(all, all->map.map_matrix[i][j]);
+			ft_draw_png(all, all->png.px, all->png.py, 0x00FFFF00);
 			x += PIXEL_SIZE;
 		}
         else if (all->map.map_matrix[i][j] == '0')
