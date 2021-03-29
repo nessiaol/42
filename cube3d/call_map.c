@@ -23,7 +23,7 @@ void	ft_draw_minimap_first(t_all *all)
 	i = 0;
 	while(all->map.map_matrix[i])
 	{
-		printf("linea: %s\n", all->map.map_matrix[i]);
+		//printf("linea: %s\n", all->map.map_matrix[i]);
 		ft_draw_line_first(all, x, y, i);
 		y += PIXEL_SIZE;
 		i++;
@@ -39,7 +39,7 @@ void	ft_draw_minimap(t_all *all)
 	i = 0;
 	while(all->map.map_matrix[i])
 	{
-		printf("linea: %s\n", all->map.map_matrix[i]);
+		//printf("linea: %s\n", all->map.map_matrix[i]);
 		ft_draw_line(all, x, y, i);
 		y += PIXEL_SIZE;
 		i++;

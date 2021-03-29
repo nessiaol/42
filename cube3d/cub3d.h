@@ -83,6 +83,21 @@ typedef	struct	    s_list {
 	struct s_list	*next;
 }					t_list;
 
+typedef struct	s_ray {
+	double		plane_x;
+	double		plane_y;
+	double		pos_x;
+	double		pos_y;
+	double		time;
+	double		oldtime;
+	double		camera_x;
+	double		camera_y;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		dir_x;
+	double		dir_y;
+}				t_ray;
+
 typedef	struct	s_all {
 	t_img		img;					
 	t_map		map;
@@ -90,9 +105,10 @@ typedef	struct	s_all {
 	t_direction	direction;
 	t_keyboard	keyboard;
 	t_png		png;
+	t_ray		ray;
 }				t_all;
 
-int			ft_render_map(t_all *all);
+int				ft_render_map(t_all *all);
 int            	key_hook(int keycode, t_all *all);
 void			ft_draw(t_all *all);
 void			ft_init_window(t_all *all);
@@ -133,6 +149,7 @@ int				create_trgb(int t, int r, int g, int b);
 void			ft_init_direction(t_all *all);
 void			ft_init_keys(t_all *all);
 void			ft_init_xy(t_all *all);
+void			ft_init_rays(t_all *all);
 
 void			ft_list_to_matrix(t_all *all, t_list *list);
 void			ft_draw_minimap(t_all *all);

@@ -12,9 +12,10 @@ t_list		*ft_check_options(int fd, t_all *all, t_list *list)
         list = list->next;
 		if (list->content[0] == '1' || list->content[0] == '0')
 			return (list);
-    }
+	}
     ft_lstadd_back(&list, ft_lstnew(line));
     list = list->next;
+	free(line);
 	return (list);
 }
 

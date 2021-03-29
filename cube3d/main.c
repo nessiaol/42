@@ -1,23 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   nuovo.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/21 13:31:04 by bde-luca          #+#    #+#             */
-/*   Updated: 2021/03/29 16:58:29 by bde-luca         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
-
-int			ft_render_map(t_all *all)
-{
-	ft_key_register(all);
-	//mlx_put_image_to_window(all->mlx.mlx, all->mlx.win, all->img.img, 0, 0);
-	return(0);
-}
 
 void		ft_init_window(t_all *all)
 {
@@ -28,13 +9,36 @@ void		ft_init_window(t_all *all)
 								&all->img.endian);
 }
 
-int             main(int argc, char **argv)
+
+int			ft_render_map(t_all *all)
+{
+	int x = 0;
+
+	while (x < all->map.res_x)
+    {
+		//calculate ray position and direction
+    	double cameraX = 2 * x / double(w) - 1; //x-coordinate in camera space
+    	double rayDirX = dirX + planeX * cameraX;
+    	double rayDirY = dirY + planeY * cameraX;
+		x++;
+	}
+	ft_key_register(all);
+	return(0);
+}	
+
+int			main(int argc, char **argv)
 {
 	t_all				all;
     t_list          	*list;
 	int 				fd;
 
-	if (argc == 2)
+	double posX = 22, posY = 12;  //x and y start position
+	double dirX = -1, dirY = 0; //initial direction vector
+	double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
+	double time = 0; //time of current frame
+  	double oldTime = 0; //time of previous frame
+
+		if (argc == 2)
 	{
 		if (!(fd = open(argv[1], O_RDONLY)))
 			return (-1);
@@ -42,7 +46,6 @@ int             main(int argc, char **argv)
 		list = ft_check_options(fd, &all, list);
 		
 		ft_init_window(&all);
-		//ft_init_keys(&all);
 		ft_init_xy(&all);
 
     	ft_check_map(fd, list);
@@ -59,4 +62,5 @@ int             main(int argc, char **argv)
 		mlx_loop_hook(all.mlx.mlx, ft_render_map, &all);
     	mlx_loop(all.mlx.mlx);
 	}
+	return(0);
 }

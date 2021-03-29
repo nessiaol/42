@@ -15,7 +15,7 @@ UTILS = ./utils/get_next_line.c \
 		./utils/ft_substr.c \
 		./utils/ft_lstsize.c \
 
-SRC = 	nuovo.c \
+SRC = 	main.c \
 		read_map.c \
 		parse_map.c \
 		draw_map.c \
