@@ -23,6 +23,8 @@ SRC = 	main.c \
 		visual.c \
 		call_map.c \
 		keys.c \
+		draw_raycasting.c \
+		keypress.c \
 		
 
 OBJ = $(SRC:.c=.o)

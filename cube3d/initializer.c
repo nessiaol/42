@@ -14,18 +14,23 @@ void	ft_init_xy(t_all *all)
 	all->map.start_y = 0;
 }
 
+void	ft_init_player(t_all *all)
+{
+	all->player.dir_x = -1;
+	all->player.dir_y = 0;
+	all->player.plane_x = 0;
+	all->player.plane_y = 0.66;
+}
+
 void	ft_init_rays(t_all *all)
 {
 	all->ray.camera_x = 0;
 	all->ray.camera_y = 0;
-	all->ray.pos_x = 22;
-	all->ray.pos_y = 12;
 	all->ray.time = 0;
 	all->ray.oldtime = 0;
-	all->ray.plane_x = 0;
-	all->ray.plane_y = 0.66;
 	all->ray.ray_dir_x = 0;
 	all->ray.ray_dir_y = 0;
-	all->ray.dir_x = -1;
-	all->ray.dir_y = 0;
+	all->ray.movespeed = 0.05;
+	all->texture.height = 64;
+	all->texture.width = 64;
 }

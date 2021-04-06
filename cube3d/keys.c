@@ -32,7 +32,7 @@ int ft_key_register(t_all *all)
 	all->img.img = mlx_new_image(all->mlx.mlx, all->map.res_x, all->map.res_y);
     all->img.addr = mlx_get_data_addr(all->img.img, &all->img.bits_per_pixel, &all->img.line_length,
 								&all->img.endian);
-	ft_draw_minimap(all);
+	//ft_draw_minimap(all);
 	mlx_put_image_to_window(all->mlx.mlx, all->mlx.win, all->img.img, 0, 0);
 	return (0);
 }

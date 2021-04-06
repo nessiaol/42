@@ -7,6 +7,7 @@
 # define KEYRELEASE 3
 # define KEYPRESSMASK 1L
 # define KEYRELEASEMASK 2L
+# define ABS (x>0)? x: -x
 
 # include <stdio.h>
 # include <unistd.h>
@@ -27,15 +28,9 @@ typedef struct  s_img {
     int         endian;
 }               t_img;
 
-// typedef struct s_player{
-// 	int			pos_x;
-// 	int			pos_y;
-// }			t_player;
-
 typedef struct	s_keyboard {
 	int			keyboard[128];
 }				t_keyboard;
-
 
 typedef struct	s_direction {
 	int			north;
@@ -67,9 +62,6 @@ typedef struct  s_map {
 	int			color_ceiling;
 	int			start_x;
 	int			start_y;
-	//int			written_pixel;
-	//int			map_size_y;
-	//int			map_start;
 	char		**map_matrix;
 }               t_map;
 
@@ -83,19 +75,43 @@ typedef	struct	    s_list {
 	struct s_list	*next;
 }					t_list;
 
-typedef struct	s_ray {
+typedef struct		s_player {
 	double		plane_x;
 	double		plane_y;
 	double		pos_x;
 	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+}					t_player;
+
+typedef struct 		s_texture {
+	int			height;
+	int			width;
+}					t_texture;
+
+typedef struct	s_ray {
 	double		time;
 	double		oldtime;
 	double		camera_x;
 	double		camera_y;
 	double		ray_dir_x;
 	double		ray_dir_y;
-	double		dir_x;
-	double		dir_y;
+	int			map_x;		//which box of the map we're in
+	int			map_y;		//which box of the map we're in
+	double		side_dist_x;	//length of ray from current position to next x or y-side
+	double		side_dist_y;	//length of ray from current position to next x or y-side
+	double		delta_dist_x; //length of ray from one x or y-side to next x or y-side
+	double		delta_dist_y;  //length of ray from one x or y-side to next x or y-side
+	double		perp_wall_dist;   //distanza perpendicolare dal muro 
+	int			step_x;		//what direction to step in x or y-direction (either +1 or -1)
+	int			step_y;		//what direction to step in x or y-direction (either +1 or -1)
+	int			hit;		//was there a wall hit?
+	int			side;		//was a NS or a EW wall hit?
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	float		movespeed;
+
 }				t_ray;
 
 typedef	struct	s_all {
@@ -106,9 +122,12 @@ typedef	struct	s_all {
 	t_keyboard	keyboard;
 	t_png		png;
 	t_ray		ray;
+	t_player	player;
+	t_texture	texture;
 }				t_all;
 
 int				ft_render_map(t_all *all);
+void			ft_put_player(int x, t_all *all);
 int            	key_hook(int keycode, t_all *all);
 void			ft_draw(t_all *all);
 void			ft_init_window(t_all *all);
@@ -150,8 +169,10 @@ void			ft_init_direction(t_all *all);
 void			ft_init_keys(t_all *all);
 void			ft_init_xy(t_all *all);
 void			ft_init_rays(t_all *all);
+void			ft_init_player(t_all *all);
 
 void			ft_list_to_matrix(t_all *all, t_list *list);
+void			ft_find_player_pos(t_all *all);
 void			ft_draw_minimap(t_all *all);
 void			ft_draw_minimap_first(t_all *all);
 
@@ -164,5 +185,13 @@ void			ft_forward(t_all *all);
 void			ft_backward(t_all *all);
 void			ft_left(t_all *all);
 void			ft_right(t_all *all);
+
+void			ft_draw_ver_line(int x, t_all *all, int color);
+
+int				ft_keypress(t_all *all);
+void			ft_move_forward(t_all *all);
+void			ft_move_backward(t_all *all);
+void			ft_move_left(t_all *all);
+void			ft_move_right(t_all *all);
 
 # endif
