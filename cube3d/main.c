@@ -54,13 +54,17 @@ void		ft_perform_dda(t_all *all)  ///// DDA PER TROVARE QUANDO COLPISCI UN MURO 
         {
         	all->ray.side_dist_x += all->ray.delta_dist_x;
         	all->ray.map_x += all->ray.step_x;
-        	all->ray.side = 0;
+        	all->ray.side = 2;
+			if (all->ray.step_x == -1)
+				all->ray.side = 0;
         }
         else
         {
     		all->ray.side_dist_y += all->ray.delta_dist_y;
         	all->ray.map_y += all->ray.step_y;
         	all->ray.side = 1;
+			if (all->ray.step_y == -1)
+				all->ray.side = 3;
         }
         //Check if ray has hit a wall
         if (all->map.map_matrix[all->ray.map_x][all->ray.map_y] == '1')
@@ -70,7 +74,7 @@ void		ft_perform_dda(t_all *all)  ///// DDA PER TROVARE QUANDO COLPISCI UN MURO 
 
 void		ft_calc_distance(t_all *all)  ///// CALCOLA DISTANZA TRA PLAYER E IL MURO COLPITO /////
 {
-    if (all->ray.side == 0)
+    if (all->ray.side == 0 || all->ray.side == 2)
 		all->ray.perp_wall_dist = (all->ray.map_x - all->player.pos_x
 		+ (1 - all->ray.step_x) / 2) / all->ray.ray_dir_x;
 	else

@@ -1,8 +1,8 @@
 R  1920 1080
-NO ./pics/colorstone.png
-SO ./pics/purplestone.png
+NO ./texture/glass.png
+SO ./pics/colorstone.png
 WE ./pics/greystone.png
-EA ./path_to_the_east_texture
+EA ./pics/purplestone.png
 
 S ./path_to_the_sprite_texture
 F 220,100,35

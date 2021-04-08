@@ -84,6 +84,18 @@ typedef struct		s_player {
 	double		dir_y;
 }					t_player;
 
+typedef struct		s_skyfloor {
+		int		ceiling_x;
+		int		ceiling_y;
+		float	floor_x;
+		float	floor_y;
+		float	floor_step_x;
+		float	floor_step_y;
+		float	pos_z;
+		float	row_distance;	
+}					t_skyfloor;
+
+
 typedef struct 		s_texture {
 	int			height;
 	int			width;
@@ -162,6 +174,14 @@ typedef struct		s_ray {
 
 }					t_ray;
 
+typedef struct		s_camera {
+	double		old_dir_x;
+	//double		old_dir_y;
+	double		rot_speed;
+	double		old_plane_x;
+	//double		old_plane_y;
+}					t_camera;
+
 typedef	struct		s_all {
 	t_img		img;					
 	t_map		map;
@@ -176,6 +196,8 @@ typedef	struct		s_all {
 	t_south		south;
 	t_west		west;
 	t_east		east;
+	t_skyfloor	skyfloor;
+	t_camera	camera;
 }					t_all;
 
 int				ft_render_map(t_all *all);

@@ -27,13 +27,31 @@ int		ft_keypress(t_all *all)
 	// 	ft_draw_minimap(all);
 	// 	mlx_put_image_to_window(all->mlx.mlx, all->mlx.win, all->img.img, 0, 0);
 	// }
-
+	if (all->keyboard.keyboard[124])
+	{
+		all->camera.old_dir_x = all->player.dir_x;
+		all->player.dir_x = all->player.dir_x * cos(-(all->camera.rot_speed)) - all->player.dir_y * sin(-all->camera.rot_speed);
+		all->player.dir_y = all->camera.old_dir_x * sin(-(all->camera.rot_speed)) + all->player.dir_y * cos(-all->camera.rot_speed);
+		all->camera.old_plane_x = all->player.plane_x;
+		all->player.plane_x = all->player.plane_x * cos(-(all->camera.rot_speed)) - all->player.plane_y * sin(-all->camera.rot_speed);
+		all->player.plane_y = all->camera.old_plane_x * sin(-(all->camera.rot_speed)) + all->player.plane_y * cos(-all->camera.rot_speed);
+	}
+	if (all->keyboard.keyboard[123])
+	{
+		all->camera.old_dir_x = all->player.dir_x;
+		all->player.dir_x = all->player.dir_x * cos(all->camera.rot_speed) - all->player.dir_y * sin(all->camera.rot_speed);
+		all->player.dir_y = all->camera.old_dir_x * sin(all->camera.rot_speed) + all->player.dir_y * cos(all->camera.rot_speed);
+		all->camera.old_plane_x = all->player.plane_x;
+		all->player.plane_x = all->player.plane_x * cos(all->camera.rot_speed) - all->player.plane_y * sin(all->camera.rot_speed);
+		all->player.plane_y = all->camera.old_plane_x * sin(all->camera.rot_speed) + all->player.plane_y * cos(all->camera.rot_speed);
+	}
 	if (all->keyboard.keyboard[53])
 	{
 		mlx_destroy_image(all->mlx.mlx, all->img.img);
 		mlx_destroy_window(all->mlx.mlx, all->mlx.win);
 		exit (0);
 	}
+	
 	mlx_destroy_image(all->mlx.mlx, all->img.img);
 	all->img.img = mlx_new_image(all->mlx.mlx, all->map.res_x, all->map.res_y);
     all->img.addr = mlx_get_data_addr(all->img.img, &all->img.bits_per_pixel, &all->img.line_length,
