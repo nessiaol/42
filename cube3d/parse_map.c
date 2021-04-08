@@ -35,13 +35,15 @@ void		ft_floor_color(t_all *all, t_list *list)
 			i++;
 		i++;
 		all->map.f_blue = ft_atoi(&list->content[i]);
-		all->map.color_floor = create_trgb(0, all->map.f_red, all->map.f_green, all->map.f_blue);
+		all->map.color_floor = ft_create_trgb(all->map.f_red, all->map.f_green, all->map.f_blue);
     }
 }
 
 void		ft_ceiling_color(t_all *all, t_list *list)
 {
 	int i;
+	int color;
+	char *rgbcolor;
 
 	i = 0;
 	if (list->content[i] == 'C' && list->content[i + 1] == ' ')
@@ -57,7 +59,12 @@ void		ft_ceiling_color(t_all *all, t_list *list)
 			i++;
 		i++;
 		all->map.c_blue = ft_atoi(&list->content[i]);
-		all->map.color_ceiling = create_trgb(0, all->map.c_red, all->map.c_green, all->map.c_blue);
+		// printf("colore soffitto rosso: %d verde: %d blu: %d\n", all->map.c_red, all->map.c_green, all->map.c_blue);
+		color = ft_create_trgb(all->map.c_red, all->map.c_green, all->map.c_blue);
+		// printf("colore soffitto rgb: %d\n", color);
+		rgbcolor = ft_itoa(color);
+		all->map.color_ceiling = ft_strjoin("0x", rgbcolor);
+		// printf("colore soffitto: %s\n", all->map.color_ceiling);
 	}
 }
 
@@ -84,7 +91,19 @@ void		ft_line_parsing_one(t_all *all, t_list *list)
 	}
 }
 
-int		create_trgb(int t, int r, int g, int b)
+int		ft_create_trgb(int red, int green, int blue)
 {
-	return(t << 24 | r << 16 | g << 8 | b);
+	int rgb;
+
+	rgb = red;
+	rgb = (rgb << 8) + green;
+	rgb = (rgb << 8) + blue;
+	return (rgb);
 }
+
+
+
+// int		create_trgb(int t, int r, int g, int b)
+// {
+// 	return(t << 24 | r << 16 | g << 8 | b);
+// }

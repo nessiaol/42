@@ -122,16 +122,17 @@ int			ft_render_map(t_all *all)
 	int x = 0;
 	// ft_key_register(all);
 	ft_keypress(all);
+	
 	while (x < all->map.res_x)
     {
+
 		ft_put_player(x, all);		//posiziona il player
 		ft_steps(all);    			//calcula passi e distanza iniziale
 		ft_perform_dda(all);		//calcola distanza dai muri
 		ft_calc_distance(all);  	//calcola distanza secondo la direzione della camera
-		
 //------------------- colore dei muri
-      
-      	ft_draw_ver_line(x, all, 0x0000FFFF);  //draw the pixels of the stripe as a vertical line
+		ft_put_texture(x, all);
+      	//ft_draw_ver_line(x, all, 0xFFFF00);  //draw the pixels of the stripe as a vertical line
 		x++;
 	}
 	// mlx_destroy_image(all->mlx.mlx, all->img.img);
@@ -140,6 +141,7 @@ int			ft_render_map(t_all *all)
 	// 							&all->img.endian);
 
 	mlx_put_image_to_window(all->mlx.mlx, all->mlx.win, all->img.img, 0, 0);
+	mlx_do_sync(all->mlx.mlx);
 	return(0);
 }	
 
@@ -164,6 +166,7 @@ int			main(int argc, char **argv)
     	ft_check_map(fd, list);
 		ft_list_to_matrix(&all, list);
 		ft_find_player_pos(&all);
+		ft_load_texture(&all);
 		// printf("player y: %f player x: %f\n", all.player.pos_y, all.player.pos_x);
 		// printf("x: %d  y: %d\n", all.map.res_x, all.map.res_y);
 
@@ -174,7 +177,7 @@ int			main(int argc, char **argv)
 		//printf("prova1");
 		mlx_loop_hook(all.mlx.mlx, ft_render_map, &all);
 		// printf("player pos x: %f\n", all.player.pos_x);
-		// printf("matrix line 4: %s\n", all.map.map_matrix[4]);
+		//printf("matrix line 4: %s\n", all.map.map_matrix[4]);
 		// printf("matrix player pos: %c\n", all.map.map_matrix[(int)(all.player.pos_y)][(int)(all.player.pos_x)]);
 
 		mlx_hook(all.mlx.win, KEYPRESS, KEYPRESSMASK, ft_key_hit, &all);

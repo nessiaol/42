@@ -55,12 +55,10 @@ void		ft_draw_png(t_all *all, int x, int y, int color)
         while (l < (x + PNG_SIZE))
         {
             my_mlx_pixel_put(all, l, h, color);   
-			//mlx_pixel_put(all->mlx.mlx, all->mlx.win, l, h, color);
             l++;
         }
         h++;
     }
-	//mlx_pixel_put(all->mlx.mlx, all->mlx.win, x, y, color);
 }
 
 void        ft_draw_line_first(t_all *all, int x, int y, int i)
@@ -120,7 +118,6 @@ void        ft_draw_line(t_all *all, int x, int y, int i)
 		{
 			ft_check_start_dir(all, all->map.map_matrix[i][j]);
 			ft_draw_png(all, all->png.px, all->png.py, 0x00FFFF00);
-			//printf("x: %d, y: %d\n", all->png.px, all->png.py);
 			x += PIXEL_SIZE;
 		}
         else if (all->map.map_matrix[i][j] == '0')

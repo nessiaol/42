@@ -12,39 +12,39 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include <math.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 //# include "libraries/libft/libft.h"
-# include "libraries/minilibx/mlx.h"
+# include "mlx/mlx.h"
 
-typedef struct  s_img {
+typedef struct  	s_img {
     void        *img;
     char        *addr;
     int         bits_per_pixel;
     int         line_length;
     int         endian;
-}               t_img;
+}               	t_img;
 
-typedef struct	s_keyboard {
+typedef struct		s_keyboard {
 	int			keyboard[128];
-}				t_keyboard;
+}					t_keyboard;
 
-typedef struct	s_direction {
+typedef struct		s_direction {
 	int			north;
 	int			south;
 	int			west;
 	int			east;
-}				t_direction;
+}					t_direction;
 
-typedef struct s_png {
+typedef struct 		s_png {
 	int			px;
 	int			py;
-}				t_png;
+}					t_png;
 
-typedef struct  s_map {
+typedef struct  	s_map {
     int         res_x;
     int         res_y;
     char        *north_texture;
@@ -59,16 +59,16 @@ typedef struct  s_map {
     int         c_green;
     int         c_blue;
 	int			color_floor;
-	int			color_ceiling;
+	char		*color_ceiling;
 	int			start_x;
 	int			start_y;
 	char		**map_matrix;
-}               t_map;
+}               	t_map;
 
-typedef struct  s_mlx {
+typedef struct  	s_mlx {
     void        *mlx;
     void        *win;
-}               t_mlx;
+}               	t_mlx;
 
 typedef	struct	    s_list {
 	char			*content;
@@ -87,9 +87,57 @@ typedef struct		s_player {
 typedef struct 		s_texture {
 	int			height;
 	int			width;
+	int			*buffer;
+	double		wall_x;
+	double		wall_y;
+	int			texture_x;
+	int			texture_y;
+	double		position;
+	double		step;
+	int			color_pixel;
 }					t_texture;
 
-typedef struct	s_ray {
+typedef struct 		s_north {
+	void			*img;
+	unsigned int	*data;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_lenght;
+	int				endian;
+}					t_north;
+
+typedef struct 		s_south {
+	void			*img;
+	unsigned int	*data;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_lenght;
+	int				endian;
+}					t_south;
+
+typedef struct 		s_west {
+	void			*img;
+	unsigned int	*data;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_lenght;
+	int				endian;
+}					t_west;
+
+typedef struct 		s_east {
+	void			*img;
+	unsigned int	*data;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_lenght;
+	int				endian;
+}					t_east;
+
+typedef struct		s_ray {
 	double		time;
 	double		oldtime;
 	double		camera_x;
@@ -112,9 +160,9 @@ typedef struct	s_ray {
 	int			draw_end;
 	float		movespeed;
 
-}				t_ray;
+}					t_ray;
 
-typedef	struct	s_all {
+typedef	struct		s_all {
 	t_img		img;					
 	t_map		map;
 	t_mlx		mlx;
@@ -124,7 +172,11 @@ typedef	struct	s_all {
 	t_ray		ray;
 	t_player	player;
 	t_texture	texture;
-}				t_all;
+	t_north		north;
+	t_south		south;
+	t_west		west;
+	t_east		east;
+}					t_all;
 
 int				ft_render_map(t_all *all);
 void			ft_put_player(int x, t_all *all);
@@ -139,6 +191,7 @@ char	        *ft_strjoin(const char *src, const char *dst);
 char	        *ft_strdup(const char *str);
 char	        *ft_substr_get(char *str, size_t start, size_t len);
 char	        *joinbuffer(char *current, char *buf);
+char			*ft_itoa(int nb);
 
 char	        *get_newline(char *current, char **line, int read_res);
 int		        get_next_line(int fd, char **line);
@@ -163,7 +216,7 @@ void			ft_line_parsing_one(t_all *all, t_list *list);
 void			ft_parse_textures(t_all *all, t_list *list);
 void			ft_floor_color(t_all *all, t_list *list);
 void			ft_ceiling_color(t_all *all, t_list *list);
-int				create_trgb(int t, int r, int g, int b);
+int				ft_create_trgb(int red, int green, int blue);
 
 void			ft_init_direction(t_all *all);
 void			ft_init_keys(t_all *all);
@@ -187,6 +240,8 @@ void			ft_left(t_all *all);
 void			ft_right(t_all *all);
 
 void			ft_draw_ver_line(int x, t_all *all, int color);
+void			ft_put_texture(int x, t_all *all);
+void			ft_load_texture(t_all *all);
 
 int				ft_keypress(t_all *all);
 void			ft_move_forward(t_all *all);

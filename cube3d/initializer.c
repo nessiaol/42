@@ -30,7 +30,7 @@ void	ft_init_rays(t_all *all)
 	all->ray.oldtime = 0;
 	all->ray.ray_dir_x = 0;
 	all->ray.ray_dir_y = 0;
-	all->ray.movespeed = 0.05;
+	all->ray.movespeed = 0.08;
 	all->texture.height = 64;
 	all->texture.width = 64;
 }
