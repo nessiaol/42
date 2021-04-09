@@ -83,6 +83,17 @@ void	ft_move_backward(t_all *all)
 
 void	ft_move_left(t_all *all)
 {
+	double	dir_x;
+	double	dir_y;
+	double	old_dirx;
+	double	old_diry;
+
+	old_dirx = all->player.dir_x;
+	old_diry = all->player.dir_y;
+
+	dir_x = all->player.dir_x * cos(-(all->camera.rot_speed)) - all->player.dir_y * sin(-all->camera.rot_speed);
+	dir_y = old_dirx * sin(-(all->camera.rot_speed)) + all->player.dir_y * cos(-all->camera.rot_speed);
+
 	if (all->map.map_matrix[(int)(all->player.pos_x + all->player.dir_x
 		* all->ray.movespeed)][(int)(all->player.pos_y)] != '1')
 		all->player.pos_y += all->player.dir_x * all->ray.movespeed;
@@ -93,10 +104,20 @@ void	ft_move_left(t_all *all)
 
 void	ft_move_right(t_all *all)
 {
+	double	dir_x;
+	double	dir_y;
+	double	old_dirx;
+	//double	old_diry;
+
+	old_dirx = all->player.dir_x;
+	dir_x = all->player.dir_x * cos((all->camera.rot_speed)) - all->player.dir_y * sin(all->camera.rot_speed);
+	dir_y = old_dirx * sin((all->camera.rot_speed)) + all->player.dir_y * cos(all->camera.rot_speed);
+
+
 	if (all->map.map_matrix[(int)(all->player.pos_x - all->player.dir_x
 		* all->ray.movespeed)][(int)(all->player.pos_y)] != '1')
 		all->player.pos_y -= all->player.dir_x * all->ray.movespeed;
     if (all->map.map_matrix[(int)(all->player.pos_x)][(int)(all->player.pos_y
 		+ all->player.dir_y * all->ray.movespeed)] != '1')
-		all->player.pos_x -= all->player.dir_y * all->ray.movespeed;
+		all->player.pos_x += all->player.dir_y * all->ray.movespeed;
 }
