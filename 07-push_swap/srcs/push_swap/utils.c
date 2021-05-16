@@ -1,22 +1,5 @@
 #include "push_swap.h"
 
-// int ft_isdigit_string(char *s)
-// {
-//     int i;
-//     i = 0;
-//     if (!s)
-//         return (1);
-//     if (s[0] == '-')
-//         i++;
-//     while (s[i])
-//     {
-//         if (!ft_isdigit(s[i]))
-//             return (0);
-//         i++;
-//     }
-//     return (1);
-// }
-
 int		ft_checkquotes(char *argument)
 {
 	int n;
@@ -31,4 +14,27 @@ int		ft_checkquotes(char *argument)
 		n++;
 	}
 	return(0);
+}
+
+void	ft_strategy(t_all *all, t_stack *a)
+{
+	int x;
+
+	x = 0;
+	if (all->size == 2)
+	{
+		if (a->nbrs[0] > a->nbrs[1])
+		{
+			ft_swap(&a->nbrs[0], &a->nbrs[1]);
+			all->moves++;
+		}
+	}
+	if (all->size == 3)
+		ft_three_nbrs(all, a);
+	// if (all->size <= 5)
+	// 	ft_five_nbrs(all, a);
+	// if (all->size <= 100)
+	// 	ft_hundred_nbrs(all, a);
+	// if (all->size > 100)
+	// 	ft_many_nbrs(all, a);
 }

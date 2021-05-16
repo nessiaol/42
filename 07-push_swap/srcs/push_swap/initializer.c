@@ -6,26 +6,48 @@ void	ft_init(t_all *all)
 	all->size = 0;
 }
 
-// void    split_to_stack(t_all *all, char *arg)
-// {
-//     char    **tmp;
-//     tmp = ft_split(arg, ' ');
-//     all->a.nbrs = malloc((all->size(tmp)) * sizeof(int));
-//     all->b.nbrs = malloc((all->size(tmp)) * sizeof(int));
-//     all->a.size = all->size(tmp);
-//     //check_args(a->size, tmp);
-//     init_stack(tmp, all->a, 0);
-//     //free_matrix(tmp);
-// }
+void	ft_find_minmax_a(t_all *all, t_stack *a)
+{
+	int	i;
+	t_stack	temp;
+	i = 0;
 
-// void    ft_init_stack(char **argv, t_all *all)
-// {
-//     long long   i;
+	temp.nbrs = (int *)calloc(sizeof(int *), all->size-1);
+	while (a->nbrs[i])
+	{
+		temp.nbrs[i] = a->nbrs[i];
+		i++;
+	}
+	ft_bubblesort(all, &temp);
+	a->max = temp.nbrs[all->size-1];
+	a->min = temp.nbrs[0];
 
-//     i = 0;
-//     while (i < all->size)
-//     {
-//         all->a.nbrs[i] = atoi(argv[i]);
-//         i++;
-//     }
+	free(temp.nbrs);
+	printf("massimo a: %d\n", a->max);
+	printf("minimo a:  %d\n", a->min);
+}
+
+// void	ft_find_minmax_b(t_all *all, t_stack *b)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	b->max = b->nbrs[i];
+// 	b->min = b->nbrs[i];
+// 	while(i < all->size)
+// 	{
+// 		if (b->nbrs[i] > b->max)
+// 			b->max = b->nbrs[i];
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while(i >= 0)
+// 	{
+// 		if (b->nbrs[i] > b->min)
+// 			b->min = b->nbrs[i];
+// 		i++;
+// 	}
+
+// 	printf("massimo b: %d", b->max);
+// 	printf("minimo b:  %d", b->min);
 // }

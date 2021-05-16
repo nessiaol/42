@@ -27,6 +27,7 @@ void ft_bubblesort(t_all *all, t_stack *a)
 
 void ft_swap(int *a, int *b)
 {
+	write(1, "sa\n", 3);
 	int temp;
 
 	temp = *a;

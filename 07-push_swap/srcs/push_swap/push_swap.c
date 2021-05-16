@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:18:01 by dmangola          #+#    #+#             */
-/*   Updated: 2021/05/16 16:05:39 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/05/16 18:49:33 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,24 +109,35 @@ int main(int argc, char **argv)
 			x++;
 		}
 		
+		i = 0;
+
+		//ft_find_minmax_a(&all, &a);
+
 		printf("***** UNORDERED stack a:\n"); 
+		//printf("stack a[%d]: %d\n", i, a.nbrs[i]);
 		ft_print_stack(&all, &a);
 		
-		ft_bubblesort(&all, &a);
-		printf("***** ORDERED stack a: \n"); 
+		ft_strategy(&all, &a);		//in utils
+
+		printf("nuova stack:\n");	//per ora funziona con 2 e 3 numeri
 		ft_print_stack(&all, &a);
 
-		ft_rotate(&all, &a);
-		printf("***** ROTATE stack a: \n"); 
-		ft_print_stack(&all, &a);
+		// ft_bubblesort(&all, &a);
+		// printf("***** ORDERED stack a: \n"); 
+		// ft_print_stack(&all, &a);
+		// i = 0;
+		// ft_rotate(&all, &a);
+		// printf("***** ROTATE stack a: \n"); 
+		// //printf("stack a[%d]: %d\n", i, a.nbrs[i]);
+		// ft_print_stack(&all, &a);
 
-		ft_rotate_rev(&all, &a);
-		printf("***** REVERSE ROTATE stack a: \n"); 
-		ft_print_stack(&all, &a);
+		// ft_rotate_rev(&all, &a);
+		// printf("***** REVERSE ROTATE stack a: \n"); 
+		// ft_print_stack(&all, &a);
 
-		ft_rotate_rev(&all, &a);
-		printf("***** REVERSE ROTATE stack a: \n"); 
-		ft_print_stack(&all, &a);
+		// ft_rotate_rev(&all, &a);
+		// printf("***** REVERSE ROTATE stack a: \n"); 
+		// ft_print_stack(&all, &a);
 
 		printf("moves: %d\n", all.moves);
 	}
