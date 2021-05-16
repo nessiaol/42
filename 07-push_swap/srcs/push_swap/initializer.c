@@ -3,6 +3,7 @@
 void	ft_init(t_all *all)
 {
 	all->moves = 0;
+	all->size = 0;
 }
 
 // void    split_to_stack(t_all *all, char *arg)
@@ -17,14 +18,14 @@ void	ft_init(t_all *all)
 //     //free_matrix(tmp);
 // }
 
-void    ft_init_stack(char **argv, t_all *all)
-{
-    long long   i;
+// void    ft_init_stack(char **argv, t_all *all)
+// {
+//     long long   i;
 
-    i = 0;
-    while (i < all->size)
-    {
-        all->a.nbrs[i] = atoi(argv[i]);
-        i++;
-    }
-}
+//     i = 0;
+//     while (i < all->size)
+//     {
+//         all->a.nbrs[i] = atoi(argv[i]);
+//         i++;
+//     }
+// }

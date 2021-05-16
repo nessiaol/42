@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:18:01 by dmangola          #+#    #+#             */
-/*   Updated: 2021/05/13 19:33:32 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/05/16 16:05:39 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	ft_count_numbers(char const *s, char c)
 	return (words);
 }
 
-
-
 int main(int argc, char **argv)
 {
 	t_stack		a;
@@ -54,16 +52,14 @@ int main(int argc, char **argv)
 	if (argc > 1)
 	{
 		int i;
-		int j;
 		int x;
-		int y;
 		char    **tmp;
+		int quotes;
 
-		i = 0;
-		x = 1;
-		y = 0;
-		j = 0;
-		all.size = 0;
+		i = 0;		//counter per atoi
+		x = 1;		//counter per gli argomenti
+
+		ft_init(&all);		//inizializza size e moves
 //			-------STAMPA GLI ARGOMENTI
 		while (x < argc)
 		{
@@ -82,40 +78,41 @@ int main(int argc, char **argv)
 		}
 		printf("\nstack size: %d\n", all.size);
 
-//			------DIVIDE GLI ARGOMENTI, LI TRASFORMA IN INT E LI METTE NELLA STACK
+//			------CREA LA MEMORIA PER LA STACK
 		
 		a.nbrs = (int *)calloc(sizeof(int *), all.size-1);
 		b.nbrs = (int *)calloc(sizeof(int *), all.size-1);
 
-		x = 1;
-		i = 0;
+		x = 1;		
+
+//			------CONTROLLA SE CI SONO VIRGOLETTE E DIVIDE I NUMERI E LI METTE NELLA STACK A
 
 		while (argv[x])
 		{
-			printf("argv x: %s\n", argv[x]);
-		    tmp = ft_split(argv[x], ' ');
-			
-			while (i < all.size)
+			quotes = ft_checkquotes(argv[x]);
+			if (quotes == 1)
 			{
-				printf("temp: %s - ", tmp[i]);
-				a.nbrs[i] = atoi(tmp[i]);
-				printf("numero in stack a: %d\n", a.nbrs[i]);
-				i++;
-			}			
+				printf("argv x: %s\n", argv[x]);
+				tmp = ft_split(argv[x], ' ');
+				
+				while (i < all.size)
+				{
+					printf("[%d] temp: %5s - ", i, tmp[i]);
+					a.nbrs[i] = atoi(tmp[i]);
+					printf("numero in stack a: %5d\n", a.nbrs[i]);
+					i++;
+				}
+			}
+			else
+					a.nbrs[i] = atoi(argv[x]);
+			i++;
 			x++;
 		}
-		printf("stack size: %d\n\n", all.size);
-
 		
-		//printf("i:%d x:%d\n", i, x);
-
-		// ft_init(&stack);
-				
 		printf("***** UNORDERED stack a:\n"); 
 		ft_print_stack(&all, &a);
 		
 		ft_bubblesort(&all, &a);
-
 		printf("***** ORDERED stack a: \n"); 
 		ft_print_stack(&all, &a);
 

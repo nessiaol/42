@@ -17,7 +17,7 @@ void ft_bubblesort(t_all *all, t_stack *a)
 			{
 				ft_swap(&a->nbrs[j],&a->nbrs[j-1]);
 				//printf("sa\n");
-				all->moves++;
+				//all->moves++;
 			}
 			j--;
 		}

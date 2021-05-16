@@ -26,13 +26,13 @@ typedef struct s_all
 int main();
 void	ft_print_stack(t_all *all, t_stack *a);
 int		ft_count_numbers(char const *s, char c);
-void    ft_init_stack(char **argv, t_all *all);
+// void    ft_init_stack(char **argv, t_all *all);
 
 
 void	ft_init(t_all *stack);
 
 void 	ft_swap(int *a, int *b);
-void ft_bubblesort(t_all *all, t_stack *a);
+void 	ft_bubblesort(t_all *all, t_stack *a);
 
 void	ft_rotate(t_all *all, t_stack *a);
 void	ft_rotate_rev(t_all *all, t_stack *a);
@@ -43,7 +43,8 @@ int		ft_numlen(int n);
 int		ft_isdigit(int c);
 char	**ft_split(char const *s, char c);
 
-
+// int 	ft_isdigit_string(char *s);
+int		ft_checkquotes(char *argument);
 
 
 //----
