@@ -16,6 +16,9 @@ PIPEX_PATH = $(addprefix $(DIR_SRCS)/, $(DIR_PIPEX))
 
 
 MINILIBFT_FILES =	ft_putstr_fd.c \
+					ft_memalloc.c \
+					ft_strjoin.c \
+					ft_strsplit.c \
 					ft_strcat.c \
 				 	ft_strncmp.c \
 					ft_strlen.c \
@@ -23,6 +26,8 @@ MINILIBFT_FILES =	ft_putstr_fd.c \
 
 PIPEX_FILES	=	pipex.c \
 				utils.c \
+				parser.c \
+				string.c \
 
 SRCS_MINILIBFT = $(addprefix $(MINILIBFT_PATH)/, $(MINILIBFT_FILES))
 SRCS_PIPEX = $(addprefix $(PIPEX_PATH)/, $(PIPEX_FILES))

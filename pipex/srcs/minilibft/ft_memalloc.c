@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/12 17:05:17 by dmangola          #+#    #+#             */
-/*   Updated: 2021/06/30 18:22:30 by bde-luca         ###   ########.fr       */
+/*   Created: 2021/07/05 19:31:54 by bde-luca          #+#    #+#             */
+/*   Updated: 2021/07/05 19:32:08 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void	*ft_memalloc(size_t size)
 {
-	while (*s)
-		ft_putchar_fd(*s++, fd);
+	char	*ptr;
+
+	ptr = NULL;
+	if (size <= 0)
+		return (NULL);
+	if ((ptr = (char *)malloc(size)))
+	{
+		ft_bzero(ptr, size);
+	}
+	return ((void *)ptr);
 }

@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bde-luca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/12 17:05:17 by dmangola          #+#    #+#             */
-/*   Updated: 2021/06/30 18:22:30 by bde-luca         ###   ########.fr       */
+/*   Created: 2021/06/30 17:49:34 by bde-luca          #+#    #+#             */
+/*   Updated: 2021/06/30 17:50:28 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void	ft_strdel(char **as)
 {
-	while (*s)
-		ft_putchar_fd(*s++, fd);
+	if (as && *as)
+	{
+		free(*as);
+		*as = NULL;
+	}
 }
