@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/30 17:44:33 by bde-luca          #+#    #+#             */
-/*   Updated: 2021/07/06 13:46:56 by bde-luca         ###   ########.fr       */
+/*   Created: 2021/01/11 16:15:25 by bde-luca          #+#    #+#             */
+/*   Updated: 2021/07/06 13:38:17 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_bzero(void *s, size_t n)
 {
-	char	*ptr;
-	int		i;
+	unsigned char	*i;
 
-	ptr = NULL;
-	ptr = (char *) malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (s1 && s2 && ptr)
+	i = (unsigned char *)s;
+	while (n > 0)
 	{
-		ft_strcpy(ptr, s1);
-		if (ft_strlen(s1) == 0)
-			i = 0;
-		else
-			i = ft_strlen(s1) - 1;
-		ft_strcat(&ptr[i], s2);
+		*i = '\0';
+		i++;
+		n--;
 	}
-	return (ptr);
 }

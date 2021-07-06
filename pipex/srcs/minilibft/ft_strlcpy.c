@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/30 17:44:33 by bde-luca          #+#    #+#             */
-/*   Updated: 2021/07/06 13:46:56 by bde-luca         ###   ########.fr       */
+/*   Created: 2021/01/12 18:41:33 by bde-luca          #+#    #+#             */
+/*   Updated: 2021/07/06 13:42:10 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char	*ptr;
-	int		i;
+	size_t	i;
 
-	ptr = NULL;
-	ptr = (char *) malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (s1 && s2 && ptr)
+	i = 0;
+	if (!dstsize)
+		return (ft_strlen(src));
+	if (!dst || !src)
+		return (0);
+	while (i < dstsize - 1 && src[i])
 	{
-		ft_strcpy(ptr, s1);
-		if (ft_strlen(s1) == 0)
-			i = 0;
-		else
-			i = ft_strlen(s1) - 1;
-		ft_strcat(&ptr[i], s2);
+		dst[i] = src[i];
+		i++;
 	}
-	return (ptr);
+	dst[i] = '\0';
+	while (src[i] != '\0')
+		i++;
+	return (i);
 }
