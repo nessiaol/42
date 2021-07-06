@@ -6,52 +6,32 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 14:18:36 by bde-luca          #+#    #+#             */
-/*   Updated: 2021/07/05 20:07:48 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:35:21 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
 
-// static int	open_file(char  *file_name, char **envp, int flags, int mode)
-// {
-// 	int		index_position;
-// 	char	*pwd;
-// 	char	*wd_path;
-// 	char	*file_path;
-
-// 	index_position = ft_index_position(envp, "PWD=");
-// 	pwd = envp[index_position] + 4;
-// 	wd_path = ft_strjoin(pwd, "/");
-// 	file_path = ft_strjoin(wd_path, file_name);
-// 	ft_strdel(&wd_path);
-// 	if ((flags == (O_RDWR | O_CREAT)) || ft_access_file(file_path))
-// 	{
-// 		if (mode)
-// 			index_position = open(file_path, flags, mode);
-// 		else
-// 			index_position = open(file_path, flags);
-// 		ft_strdel(&file_path);
-// 		return (index_position);
-// 	}	
-// 	ft_strdel(&file_path);
-// 	return(-1);
-// }
-
 void ft_call_father(char **argv, t_data *data)
 {
 	int		n;					//byte letti in read
 	char	line[MAXLINE];		//buffer per lettura
+
+	// waitpid(0, data->pipe_fd, 0);	//il primo 0 e' il pid child e il secondo zero e' l'exit del processo indicato (child)
+		//si puo' mettere anche wait(NULL) che aspetta che tutti i processi child abbiano exit(0) per eseguire il parent.
 	close(data->pipe_fd[1]);	//chiude la scrittura
 	n = read(data->pipe_fd[0], line, MAXLINE);		//legge dall'estremo di lettura della pipe
 	write(STDOUT_FILENO, line, n);		//scrive in output quello che legge dalla pipe
-	printf("programma: %s\n", argv[0]);
+	printf("father programma: %s\n", argv[0]);
+	// open_file(data->file_2, envp, O_RDWR | O_CREAT | O_TRUNC, 777);
 }
 
 void ft_call_child(char **argv, t_data *data)
 {
 	close(data->pipe_fd[0]);	//chiude la lettura
 	write(data->pipe_fd[1], "hello world\n", 12);	//scrive sull'estremo di scrittura della pipe
-	printf("programma: %s\n", argv[0]);
+	printf("child programma: %s\n", argv[0]);
+	// open_file(data->file_1, envp, O_RDONLY, 0);
 }
 
 int	main(int argc, char **argv, char **envp)		//aggiungere char **envp quando serve int argc, char **argv
@@ -59,11 +39,12 @@ int	main(int argc, char **argv, char **envp)		//aggiungere char **envp quando se
 	pid_t	pid;
 	t_data	data;
 
-	if (argc == 3)
+	if (argc == 5)
 	{
-		//parser dell'argv 2 e 3 (che sono i comandi)
-		ft_parse_cmds(&data, argv, argc, envp);
-		//open_file parser che verifica validita' input, file e comandi
+		ft_parse_cmd_1(&data, argv, envp);
+		ft_parse_cmd_2(&data, argv, envp);
+		ft_checkfile_1(&data, argv, envp);
+		ft_checkfile_2(&data, argv, envp);
 
 		if (pipe(data.pipe_fd) < 0)		//CREA LA PIPE
 		{

@@ -4,15 +4,17 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdarg.h>
 # include <sys/types.h>
 # include <sys/wait.h>	//per waitpid
 # include <fcntl.h>		//per unlink
 # define MAXLINE 64
+# define PUTSTR 0
+# define PRINTF 1
 
 typedef struct s_data
 {
 	char	**cmd_and_flags;	//comando e tutte le sue flags
+	char	**cmd_and_flags_2;	//comando e tutte le sue flags
 	char	*cmd_1;
 	char	*cmd_2;
 	char	*path_cmd_1;
@@ -46,17 +48,24 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 // static int	open_file(char  *file_name, char **envp, int flags, int mode);
 int		ft_index_position(char **src, char *to_find);
 int		ft_access_file(char *path);
+// int		open_file(char  *file_name, char **envp, int flags, int mode);
 void	ft_call_child(char **argv, t_data *data);
 void	ft_call_father(char **argv, t_data *data);
 
-void	ft_parse_cmds(t_data *data, char **argv, int argc, char **envp);
-int		ft_search_cmd(t_data *data, char **argv, char **envp);
+void	ft_parse_cmd_1(t_data *data, char **argv, char **envp);
+int		ft_search_cmd_1(t_data *data, char **envp);
+void	ft_parse_cmd_2(t_data *data, char **argv, char **envp);
+int		ft_search_cmd_2(t_data *data, char **envp);
 
-void	ft_free_all(void *arg1, ...);
+void	ft_checkfile_1(t_data *data, char **argv, char **envp);
+void	ft_checkfile_2(t_data *data, char **argv, char **envp);
+int		ft_search_file_1(t_data *data, char **envp);
+int		ft_search_file_2(t_data *data, char **envp);
+
 char	*ft_strtoupper(char *str);
 int		ft_toupper(int c);
 char	*ft_strnew(size_t size);
-int	get_nbwords(char const *s, char c);
+int		get_nbwords(char const *s, char c);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 
 #endif

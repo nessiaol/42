@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 16:56:04 by bde-luca          #+#    #+#             */
-/*   Updated: 2021/07/05 19:25:29 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/07/06 19:06:15 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,37 @@ int	ft_index_position(char **src, char *to_find)
 int	ft_access_file(char *path)
 {
 	if (access(path, F_OK) == -1)
-		ft_putstr_fd("open: no such file or directory", 2);
+		ft_putstr_fd("open: no such file or directory\n", 2);
 	else if (access(path, R_OK) == -1)
-		ft_putstr_fd("open: READ permission denied", 2);
+		ft_putstr_fd("open: READ permission denied\n", 2);
 	else if (access(path, W_OK) == -1)
-		ft_putstr_fd("open: WRITE permission denied", 2);
+		ft_putstr_fd("open: WRITE permission denied\n", 2);
 	else
 		return (1);
 	return (0);
 }
 
-void	ft_free_all(void *arg1, ...)
-{
-	va_list	args;
-	void	*vp;
+// int	open_file(char  *file_name, char **envp, int flags, int mode)
+// {
+// 	int		index_position;
+// 	char	*pwd;
+// 	char	*wd_path;
+// 	char	*file_path;
 
-	free(arg1);
-	va_start(args, arg1);
-	vp = va_arg(args, void *);
-	while (vp != 0)
-		free(vp);
-	va_end(args);
-}
+// 	index_position = ft_index_position(envp, "PWD=");
+// 	pwd = envp[index_position] + 4;
+// 	wd_path = ft_strjoin(pwd, "/");
+// 	file_path = ft_strjoin(wd_path, file_name);
+// 	ft_strdel(&wd_path);
+// 	if ((flags == (O_RDWR | O_CREAT)) || ft_access_file(file_path))
+// 	{
+// 		if (mode)
+// 			index_position = open(file_path, flags, mode);
+// 		else
+// 			index_position = open(file_path, flags);
+// 		ft_strdel(&file_path);
+// 		return (index_position);
+// 	}	
+// 	ft_strdel(&file_path);
+// 	return(-1);
+// }

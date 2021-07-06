@@ -4,7 +4,7 @@ HPATH = -Iincludes
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 DIR_SRCS = srcs
 DIR_MINILIBFT= minilibft
@@ -29,7 +29,9 @@ MINILIBFT_FILES =	ft_putstr_fd.c \
 
 PIPEX_FILES	=	pipex.c \
 				utils.c \
-				parser.c \
+				parse_cmd_1.c \
+				parse_cmd_2.c \
+				check_files.c \
 				string.c \
 
 SRCS_MINILIBFT = $(addprefix $(MINILIBFT_PATH)/, $(MINILIBFT_FILES))
