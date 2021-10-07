@@ -6,7 +6,7 @@
 #    By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 16:27:37 by dmangola          #+#    #+#              #
-#    Updated: 2021/10/07 13:34:49 by bde-luca         ###   ########.fr        #
+#    Updated: 2021/10/07 15:08:37 by bde-luca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ FILES =				main.c \
 					ft_init.c \
 					parser.c \
 					parser_files.c \
+					parse_cmds.c \
 					redirection.c \
 
 SRCS =	$(foreach FILE, $(FILES), $(shell find $(SRCDIR) -name $(FILE)))

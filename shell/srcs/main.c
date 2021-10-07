@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:07:46 by dmangola          #+#    #+#             */
-/*   Updated: 2021/10/05 15:52:05 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/10/07 13:48:41 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,13 @@ char *ft_prompt(char **envp)
 			free (line_read);
 			line_read = (char *)NULL;
 		}
-		
-		
-
 		/* Get a line from the user. */
-		
 		g_shell->line = readline ("SHellina~ ");
 		g_shell->splitted_line = ft_bnessi_split(g_shell->line, ' ');
-		//printf("prima parte della splitted line: %s\n", g_shell->splitted_line[0]);
 		parse_cmd(envp);
-		//printf("output file deve essere 0: %d", g_shell->checkif.output_file);
 		if (g_shell->checkif.output_file || g_shell->checkif.append_file)
 			ft_reset_output();
 		/* If the line has any text in it, save it on the history. */
-		//printf("prova prima di history\n");
 		if (line_read && *line_read)
 			add_history (line_read);
 	}

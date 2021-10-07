@@ -61,9 +61,15 @@ typedef struct		s_files
 
 typedef	struct		s_cmds
 {
-	char	***cmd_and_flags;
-	char	**command;
-	char	**cmds_path;
+	int		cmd_index;
+	char	*cmd;
+	char	**all_cmds;
+	char	*path_cmd;
+	int		x;
+	int		i;
+	char	**cmd_and_flags;
+	// char	**command;
+	// char	**cmds_path;
 }					t_cmds;
 
 typedef struct		s_cd
@@ -115,5 +121,9 @@ int		ft_env(char **envp);
 
 void	ft_redirect_output(void);
 void	ft_reset_output(void);
+
+/* parser cmds */
+int		ft_search_cmd(char *word, char **envp);
+int		ft_parse_cmd(char *cmd, char **envp);
 
 #endif

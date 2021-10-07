@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:45:19 by dmangola          #+#    #+#             */
-/*   Updated: 2021/09/12 17:28:36 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:25:06 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_init(void)
 	g_shell->checkif.input_file = 0;
 	g_shell->checkif.output_file = 0;
 	g_shell->checkif.delimiter_file = 0;
+	g_shell->cmds.cmd_index = -1;
 }
 
 void	ft_create_tilde_path(char *home)
