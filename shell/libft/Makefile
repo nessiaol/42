@@ -64,6 +64,7 @@ FILES =			ft_strlen.c \
 				ft_isspace_string.c \
 				ft_isdigit_string.c \
 				ft_mtxlen.c \
+				ft_matrcpy.c \
 				ft_if_free.c \
 				ft_tabcpy.c \
 				ft_if_free_mtx.c \

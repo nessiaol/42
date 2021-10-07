@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cserapon  <cserapon@student.42roma.it>     +#+  +:+       +#+        */
-/*   &&: ppunzo    <ppunzo@student.42roma.it>     +#+#+#+#+#+   +#+           */
+/*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:31:14 by cserapon          #+#    #+#             */
-/*   Updated: 2021/04/26 14:28:57 by cserapon         ###   ########.fr       */
+/*   Updated: 2021/10/07 13:35:44 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	ft_case_1(char ***splitted, char *line, int *i);
 
 int		ft_mtxlen(char **m);
 void	ft_if_free_mtx(char ***matrix);
+char	**ft_mtxcpy(char **m);
+void	ft_mtxprint(char **m);
 
 /*
 ** Integers

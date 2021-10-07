@@ -35,6 +35,11 @@ typedef struct s_pipex
 	short	x;
 }			t_pipex;
 
+typedef struct		s_env
+{
+	char	**env_cpy;
+}					t_env;
+
 typedef	struct		s_checks
 {
 	int		bool_pipes;
@@ -76,8 +81,8 @@ typedef struct		s_shell
 	t_cmds		cmds;
 	t_checks	checkif;
 	t_files		files;
+	t_env		env;
 }					t_shell;
-
 
 t_shell	*g_shell;
 
@@ -104,6 +109,7 @@ int		ft_pwd(void);
 int		ft_echo(char **av);
 int		ft_cd(char **envp);
 int		ft_if_cd(char **envp, int arg_check);
+int		ft_env(char **envp);
 
 /* redirection */
 

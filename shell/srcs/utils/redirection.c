@@ -6,13 +6,11 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:45:19 by dmangola          #+#    #+#             */
-/*   Updated: 2021/10/05 15:46:27 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/10/07 13:27:03 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ashella.h"
-
-
 
 void	ft_redirect_output(void)
 {

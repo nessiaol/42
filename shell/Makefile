@@ -6,7 +6,7 @@
 #    By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 16:27:37 by dmangola          #+#    #+#              #
-#    Updated: 2021/10/01 12:05:56 by bde-luca         ###   ########.fr        #
+#    Updated: 2021/10/07 13:34:49 by bde-luca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ FILES =				main.c \
 					graphic.c \
 					ft_echo.c \
 					ft_cd.c \
+					ft_env.c \
 					find_index_pos.c \
 					ft_init.c \
 					parser.c \

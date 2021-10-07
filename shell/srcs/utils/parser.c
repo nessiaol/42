@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:45:19 by dmangola          #+#    #+#             */
-/*   Updated: 2021/10/05 15:47:18 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/10/07 13:37:49 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ int	ft_checkif_cmd(char **envp)
 		if (!(ft_strcmp(g_shell->splitted_line[i], "cd")))
 			if (!(ft_cd(envp)))
 				return(1);
+		if (!(ft_strcmp(g_shell->splitted_line[i], "env")))
+			if (!(ft_env(envp)))
+				return(1);
 	}
-	
 	char **temp2;
-
 	temp2 = envp;
 	return (1);
 }
