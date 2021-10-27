@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 14:45:19 by dmangola          #+#    #+#             */
-/*   Updated: 2021/10/07 16:56:16 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/10/19 18:41:38 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,17 @@ int	ft_checkif_cmd(char **envp)
 		if ((ft_strcmp(word, "<")) == 0 || (ft_strcmp(word, ">")) == 0 ||
 			(ft_strcmp(word, "<<")) == 0 || (ft_strcmp(word, ">>")) == 0)
 			i += 2;
-		if (!(ft_strcmp(word, "pwd")))
+		//non entra
+		if ((ft_strcmp(g_shell->splitted_line[i], "pwd")) == 0)
 			if (!(ft_pwd()))
 				return(1);
-		if (!(ft_strcmp(word, "echo")))
+		if (!(ft_strcmp(g_shell->splitted_line[i], "echo")))
 			if (!(ft_echo(g_shell->splitted_line)))
 				return(1);
-		if (!(ft_strcmp(word, "cd")))
+		if (!(ft_strcmp(g_shell->splitted_line[i], "cd")))
 			if (!(ft_cd(envp)))
 				return(1);
-		if (!(ft_strcmp(word, "env")))
+		if (!(ft_strcmp(g_shell->splitted_line[i], "env")))
 			if (!(ft_env(envp)))
 				return(1);
 		if (!(ft_search_cmd(g_shell->splitted_line[i], envp)))
@@ -74,13 +75,9 @@ int	ft_checkif_cmd(char **envp)
 			i++;
 		}
 		g_shell->cmds.cmd_and_flags[x] = NULL;
+		//dovro' mettere un fork
 		if (!execve(g_shell->cmds.path_cmd, g_shell->cmds.cmd_and_flags, envp))
-			exit(1);
-
-		// {
-
-		// }
-		
+			exit(1);		
 	}
 	return (1);
 }

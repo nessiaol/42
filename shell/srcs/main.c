@@ -6,7 +6,7 @@
 /*   By: bde-luca <bde-luca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 16:07:46 by dmangola          #+#    #+#             */
-/*   Updated: 2021/10/07 13:48:41 by bde-luca         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:00:47 by bde-luca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char *ft_prompt(char **envp)
 			line_read = (char *)NULL;
 		}
 		/* Get a line from the user. */
-		g_shell->line = readline ("SHellina~ ");
+		g_shell->line = readline("SHellina~ ");
 		g_shell->splitted_line = ft_bnessi_split(g_shell->line, ' ');
 		parse_cmd(envp);
 		if (g_shell->checkif.output_file || g_shell->checkif.append_file)
