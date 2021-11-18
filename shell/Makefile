@@ -49,6 +49,7 @@ FILES =				main.c \
 					ft_echo.c \
 					ft_cd.c \
 					ft_env.c \
+					ft_exit.c \
 					find_index_pos.c \
 					ft_init.c \
 					parser.c \

@@ -25,13 +25,6 @@ int	parse_cmd(char **envp)
 	//check dei file
 	ft_checkif_files(envp);
 	ft_checkif_cmd(envp);
-	//check dei comandi		DA FARE!!
-	// while (g_shell->splitted_line[i] != '\0')
-	// {
-	// 	//FARGLI SALTARE I CARATTERI SPECIALI < > << >> E I FILE
-	// 	ft_checkif_cmd(g_shell->splitted_line[i], envp);
-	// 	i++;
-	// }
 	return(0);
 }
 
@@ -48,7 +41,9 @@ int	ft_checkif_cmd(char **envp)
 		if ((ft_strcmp(word, "<")) == 0 || (ft_strcmp(word, ">")) == 0 ||
 			(ft_strcmp(word, "<<")) == 0 || (ft_strcmp(word, ">>")) == 0)
 			i += 2;
-		//non entra
+		if ((ft_strcmp(g_shell->splitted_line[i], "exit")) == 0)
+			if (!(ft_exit()))
+				return(1);
 		if ((ft_strcmp(g_shell->splitted_line[i], "pwd")) == 0)
 			if (!(ft_pwd()))
 				return(1);

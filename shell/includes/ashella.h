@@ -116,6 +116,7 @@ int		ft_echo(char **av);
 int		ft_cd(char **envp);
 int		ft_if_cd(char **envp, int arg_check);
 int		ft_env(char **envp);
+int		ft_exit();
 
 /* redirection */
 
